@@ -76,7 +76,6 @@ private:
 template<typename K, typename V>
 void SkipList<K, V>::createList(K footerKey) {
     createNode(0, footer);
-
     footer->key = footerKey;
     this->level = 0;
     //设置头结
@@ -89,7 +88,7 @@ void SkipList<K, V>::createList(K footerKey) {
 
 template<typename K, typename V>
 void SkipList<K, V>::createNode(int level, Node<K, V> *&node) {
-    node = new Node<K, V>(NULL, NULL);
+    node = new Node<K, V>();
     //需要初始化数组
     //注意:这里是level+1而不是level,因为数组是从0-level
     node->forward = new Node<K, V> *[level + 1];
@@ -189,9 +188,9 @@ void SkipList<K, V>::dumpAllNodes() {
     while (tmp->forward[0] != footer) {
         tmp = tmp->forward[0];
         dumpNodeDetail(tmp, tmp->nodeLevel);
-        cout << "----------------------------" << endl;
+        // cout << "----------------------------" << endl;
     }
-    cout << endl;
+    // cout << endl;
 }
 
 template<typename K, typename V>
@@ -199,12 +198,12 @@ void SkipList<K, V>::dumpNodeDetail(Node<K, V> *node, int nodeLevel) {
     if (node == nullptr) {
         return;
     }
-    cout << "node->key:" << node->key << ",node->value:" << node->value << endl;
-    //注意是i<=nodeLevel而不是i<nodeLevel
-    for (int i = 0; i <= nodeLevel; ++i) {
-        cout << "forward[" << i << "]:" << "key:" << node->forward[i]->key << ",value:" << node->forward[i]->value
-             << endl;
-    }
+    // cout << "node->key:" << node->key << ",node->value:" << node->value << endl;
+    // //注意是i<=nodeLevel而不是i<nodeLevel
+    // for (int i = 0; i <= nodeLevel; ++i) {
+    //     cout << "forward[" << i << "]:" << "key:" << node->forward[i]->key << ",value:" << node->forward[i]->value
+    //          << endl;
+    // }
 }
 
 template<typename K, typename V>
